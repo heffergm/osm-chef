@@ -8,6 +8,7 @@
 #
 
 include_recipe 'apt'
+include_recipe 'database'
 
 %w(postgresql postgresql-contrib postgis).each do |p|
   package p do
@@ -15,22 +16,23 @@ include_recipe 'apt'
   end
 end
 
-execute 'create-gis-user' do
-  user 'postgres'
-  exists = <<-EOH
-  psql -c "select * from pg_user where usename='gisuser'" | grep -c gisuser 
-  EOH
-  command "createuser --superuser gisuser"
-  not_if exists 
+postgresql_database_user 'gisuser' do
+  connection ({:host => "127.0.0.1", :port => 5432, :username => 'postgres'})
+  action :create
 end
- 
-execute 'create-database' do
-  user 'postgres'
-  exists = <<-EOH
-  psql -c "select * from pg_database WHERE datname='gis'" | grep -c gis
-  EOH
-  command "createdb -E UTF8 -O gisuser gis && createlang plpgsql gis"
-  not_if exists
+
+postgresql_database 'gis' do
+  connection ({:host => "127.0.0.1", :port => 5432, :username => 'postgres'})
+  encoding 'UTF8'
+  owner 'gisuser'
+  action :create
+end
+
+postgresql_database_user 'gisuser' do
+  connection ({:host => "127.0.0.1", :port => 5432, :username => 'postgres'})
+  database_name 'gis'
+  privileges [:all]
+  action :grant
 end
 
 #bash 'config-gis-database' do
