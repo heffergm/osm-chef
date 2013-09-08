@@ -58,8 +58,8 @@ Vagrant.configure("2") do |config|
   # View the documentation for the provider you're using for more
   # information on available options.
 
-  config.ssh.max_tries = 40
-  config.ssh.timeout   = 120
+  #config.ssh.max_tries = 40
+  #config.ssh.timeout   = 120
 
   # The path to the Berksfile to use with Vagrant Berkshelf
   # config.berkshelf.berksfile_path = "./Berksfile"
@@ -78,15 +78,15 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.json = {
-      :mysql => {
-        :server_root_password => 'rootpass',
-        :server_debian_password => 'debpass',
-        :server_repl_password => 'replpass'
+      :postgresql => {
+        :password => {
+          :postgres => '6b211d71ec225c69c66944eae0e524c4'
+        }
       }
     }
 
     chef.run_list = [
-      "recipe[abacus::default]"
+      "recipe[postgis::default]"
     ]
   end
 end
