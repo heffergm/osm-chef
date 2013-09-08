@@ -1,13 +1,12 @@
 #
-# Cookbook Name:: osm2pgsql
-# Recipe:: default
+# Cookbook Name:: postgis
+# Recipe:: osm2pgsql
 #
 # Copyright 2013, YOUR_COMPANY_NAME
 #
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe 'apt'
 
 if node[:lsb][:release] <= '12.04'
   pkg = 'python-software-properties'
@@ -24,6 +23,7 @@ bash 'add-osm-repo' do
   code <<-EOH
     add-apt-repository -y ppa:kakrueger/openstreetmap
   EOH
+  not_if 'ls /etc/apt/sources.list.d/kakrueger-openstreetmap-precise.list'
 end
 
 package 'osm2pgsql' do

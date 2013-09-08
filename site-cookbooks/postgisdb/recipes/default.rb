@@ -8,25 +8,20 @@
 #
 
 include_recipe 'apt'
+include_recipe 'postgisdb::osm2pgsql'
 
-package 'postgresql' do
-  action :install
-end
-
-package 'postgresql-contrib' do
-  action :install
-end
-
-package 'postgis' do
-  action :install
+%w(postgresql postgresql-contrib postgis).each do |p|
+  package p do
+    action :install
+  end
 end
 
 setup_complete = '/tmp/.DONE'
 
-execute 'createuser-gis' do
-  user 'postgres'
-  command 'createuser --superuser gisuser'
-end
+#execute 'createuser-gis' do
+#  user 'postgres'
+#  command 'createuser --superuser gisuser'
+#end
 
 execute 'createdb-gis' do
   user 'postgres'
