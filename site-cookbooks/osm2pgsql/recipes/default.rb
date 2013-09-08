@@ -7,6 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe 'apt'
+
 if node[:lsb][:release] <= '12.04'
   pkg = 'python-software-properties'
 else
