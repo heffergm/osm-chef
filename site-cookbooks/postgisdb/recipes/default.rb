@@ -16,6 +16,7 @@ include_recipe 'apt'
 end
 
 execute 'create-gis-user' do
+  user 'postgres'
   exists = <<-EOH
   psql -c "select * from pg_user where usename='gisuser'" | grep -c gisuser 
   EOH
