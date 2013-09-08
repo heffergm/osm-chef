@@ -7,6 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe 'apt'
+
 %w(postgresql postgresql-contrib postgis).each do |p|
   package p do
     action :install
