@@ -15,6 +15,7 @@ include_recipe 'apt'
   end
 end
 
+setup_complete = '/tmp/.PG_SETUP_COMPLETE'
 bash 'config-gis-database' do
   user 'postgres'
   cwd '/tmp'
@@ -29,6 +30,9 @@ bash 'config-gis-database' do
     psql -d gis -f /usr/share/postgresql/9.1/contrib/postgis_comments.sql
     psql -d gis -c "GRANT SELECT ON spatial_ref_sys TO PUBLIC;"
     psql -d gis -c "GRANT ALL ON geometry_columns TO gisuser;"
+
+    touch #{setup_complete}
   EOH
+  not_if { ::File.exists?(setup_complete) }
 end
 
