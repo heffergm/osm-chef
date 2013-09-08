@@ -8,16 +8,8 @@ Vagrant.configure("2") do |config|
 
   config.vm.hostname = "postgis"
 
-  # Define multiple boxes for development
-  config.vm.define :centos do |centos|
-    centos.vm.box = "Berkshelf-CentOS-6.3-x86_64-minimal"
-    centos.vm.box_url = "https://dl.dropbox.com/u/31081437/Berkshelf-CentOS-6.3-x86_64-minimal.box"
-  end
-
-  config.vm.define :ubuntu do |ubuntu|
-    ubuntu.vm.box = "Ubuntu12.04LTS-Chef"
-    config.vm.box_url = "http://grahamc.com/vagrant/ubuntu-12.04.2-i386-chef-11-omnibus.box"
-  end
+  config.vm.box = "Ubuntu12.04LTS-Chef"
+  config.vm.box_url = "http://grahamc.com/vagrant/ubuntu-12.04.2-i386-chef-11-omnibus.box"
 
   # Assign this VM to a host-only network IP, allowing you to access it
   # via the IP. Host-only networks can talk to the host machine as well as
@@ -86,7 +78,8 @@ Vagrant.configure("2") do |config|
     }
 
     chef.run_list = [
-      "recipe[postgis::default]"
+      "recipe[postgis::default]",
+      "recipe[osm2pgsql::default]"
     ]
   end
 end
