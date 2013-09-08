@@ -7,7 +7,12 @@
 # All rights reserved - Do Not Redistribute
 #
 
-package 'software-properties-common' do
+if node[:lsb][:release] <= '12.04'
+  pkg = 'python-software-properties'
+else
+  pkg = 'software-properties-common'
+end
+package pkg do
   action :install
 end
 
