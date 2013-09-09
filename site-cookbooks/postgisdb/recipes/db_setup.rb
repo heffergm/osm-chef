@@ -20,6 +20,6 @@ end
 
 pg_database_extensions 'gis' do
   languages 'plpgsql'
-  extensions ['hstore', 'dblink']
+  #extensions ['hstore', 'dblink']
   postgis true
 end
