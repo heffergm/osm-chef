@@ -8,6 +8,7 @@ default["postgresql"]["external_pid_file"]  = "/var/run/postgresql/#{node[:postg
 default[:postgresql][:password][:postgres]  = '6b211d71ec225c69c66944eae0e524c4'
 
 default[:postgresql][:pg_hba] =  [
-  { :type => 'local', :db => 'all', :user => 'gisuser', :addr => '', :method => 'peer' }
+  { :type => 'local', :db => 'all', :user => 'gisuser', :addr => '', :method => 'peer' },
+  { :type => 'local', :db => 'all', :user => 'root', :addr => '', :method => 'ident' }
 ]
 
