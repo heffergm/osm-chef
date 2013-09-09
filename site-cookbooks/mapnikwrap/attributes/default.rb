@@ -1,3 +1,3 @@
-default[:mapnik][:ubuntu][:ppa]      = 'v2.2.0'
-default[:mapnik][:ubuntu][:packages] = [ 'libmapnik2-dev', 'python-mapnik2' ]
+override[:mapnik][:ubuntu][:ppa]      = 'v2.2.0'
+override[:mapnik][:ubuntu][:packages] = [ 'libmapnik2-dev', 'python-mapnik2' ]
 
