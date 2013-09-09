@@ -18,7 +18,6 @@ pg_database 'gis' do
   template 'template0'
 end
 
-# install extensions to database
 pg_database_extensions 'gis' do
   languages 'plpgsql'
   extensions ['hstore', 'dblink']
