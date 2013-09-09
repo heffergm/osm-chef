@@ -9,19 +9,9 @@
 
 include_recipe 'git'
 
-git 'osm2pgsql' do
-  repository 'https://github.com/openstreetmap/osm2pgsql.git'
-  reference 'master'
-  #reference node[:app_name][:git_revision]
-  action :sync
-  destination '/opt/osm2pgsql'
-  notifies :run, "bash[compile_app_name]"
-  not_if 'test -d /opt/osm2pgsql'
-end
-
-case 'node[:osm2pgsql][:install_type]'
+case node[:osm2pgsql][:install_type]
 when 'source'
-  bash 'compile_osm2pgsql' do
+  bash 'build_osm2pgsql' do
     action :nothing
     cwd '/opt/osm2pgsql'
     code <<-EOH
@@ -42,3 +32,14 @@ when 'package'
     EOH
   end
 end
+
+git 'osm2pgsql' do
+  repository 'https://github.com/openstreetmap/osm2pgsql.git'
+  reference 'master'
+  #reference node[:app_name][:git_revision]
+  action :sync
+  destination '/opt/osm2pgsql'
+  notifies :run, "bash[build_osm2pgsql]"
+  not_if 'test -d /opt/osm2pgsql'
+end
+

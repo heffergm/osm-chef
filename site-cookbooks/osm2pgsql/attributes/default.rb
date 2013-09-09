@@ -1,1 +1,1 @@
-node[:osm2pgsql][:install_type] = 'source'
+default[:osm2pgsql][:install_type] = 'package'
