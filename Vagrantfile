@@ -68,13 +68,8 @@ Vagrant.configure("2") do |config|
   # config.berkshelf.except = []
 
   config.vm.provision :chef_solo do |chef|
+    chef.data_bags_path = "data_bags"
     chef.json = {
-      #:postgresql => {
-      #  :version => '9.1',
-      #  :password => {
-      #    :postgres => '6b211d71ec225c69c66944eae0e524c4'
-      #  }
-      #}
     }
 
     chef.run_list = [
