@@ -81,7 +81,7 @@ Vagrant.configure("2") do |config|
     chef.run_list = [
       "recipe[postgisdb::default]",
       "recipe[osm2pgsql::default]",
-      "recipe[mapnik::default]"
+      "recipe[mapnikwrap::default]"
     ]
   end
 end
