@@ -7,8 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-node.postgresql.version = '9.1'
-
 pg_user 'gisuser' do
   privileges :superuser => true, :createdb => true, :login => true
   encrypted_password '667ff118ef6d196c96313aeaee7da519'
