@@ -8,8 +8,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.hostname = "postgis"
 
-  config.vm.box = "Ubuntu12.04LTS-Chef"
-  config.vm.box_url = "http://grahamc.com/vagrant/ubuntu-12.04.2-i386-chef-11-omnibus.box"
+  config.vm.box = "ubuntu-12.04-omnibus-chef"
 
   # Assign this VM to a host-only network IP, allowing you to access it
   # via the IP. Host-only networks can talk to the host machine as well as
@@ -70,11 +69,12 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.json = {
-      :postgresql => {
-        :password => {
-          :postgres => '6b211d71ec225c69c66944eae0e524c4'
-        }
-      }
+      #:postgresql => {
+      #  :version => '9.1',
+      #  :password => {
+      #    :postgres => '6b211d71ec225c69c66944eae0e524c4'
+      #  }
+      #}
     }
 
     chef.run_list = [
