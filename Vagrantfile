@@ -70,12 +70,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision :chef_solo do |chef|
     chef.data_bags_path = "data_bags"
     chef.json = {
-      :mapnik => {
-        :ubuntu => {
-          :ppa => 'v2.2.0',
-          :packages => [ "libmapnik2-dev", "python-mapnik2" ]
-        }
-      }
     }
 
     chef.run_list = [
