@@ -7,65 +7,21 @@
 # All rights reserved - Do Not Redistribute
 #
 
-%w(postgresql postgresql-contrib postgis).each do |p|
-  package p do
-    action :install
-  end
+pg_user 'gisuser' do
+  privileges :superuser => true, :createdb => true, :login => true
+  encrypted_password '667ff118ef6d196c96313aeaee7da519'
 end
 
-include_recipe 'database::postgresql'
-
-postgresql_connection_info = {:host => 'localhost',
-                              :port => node['postgresql']['config']['port'],
-                              :username => 'postgres',
-                              :password => node['postgresql']['password']['postgres']}
-
-postgresql_database 'gis' do
-  connection postgresql_connection_info
-  encoding 'UTF8'
-  action :create
+pg_database 'gis' do
+  owner 'gisuser'
+  encoding 'utf8'
+  template 'template0'
+  #locale "en_US.UTF8"
 end
 
-postgresql_database_user 'gisuser' do
-  connection postgresql_connection_info
-  action :create
+# install extensions to database
+pg_database_extensions 'gis' do
+  languages 'plpgsql'
+  #extensions ["hstore", "dblink"]  # install `hstore` and `dblink` extensions - multiple values in array
+  postgis true
 end
-
-
-#execute 'createuser-gisuser' do
-#  user 'postgres'
-#  command 'createuser --superuser gisuser'
-#  not_if "psql postgres -tAc \"SELECT 1 FROM pg_roles WHERE rolname='gisuser'\""
-#end
-
-#execute 'createdb-gis' do
-#  user 'postgres'
-#  command 'createdb -E utf8 -O gisuser gis'
-#  not_if 'psql -l | grep -c gis'
-#end
-
-#execute 'postgis-contrib' do
-#  user 'postgres'
-#  command 'psql -d gis -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql'
-#end
-
-#execute 'postgis-spatial' do
-#  user 'postgres'
-#  command 'psql -d gis -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql'
-#end
-
-#execute 'postgis-comments' do
-#  user 'postgres'
-#  command 'psql -d gis -f /usr/share/postgresql/9.1/contrib/postgis_comments.sql'
-#end
-
-#execute 'postgis-grant-select' do
-#  user 'postgres'
-#  command 'psql -d gis -c "GRANT SELECT ON spatial_ref_sys TO PUBLIC;"'
-#end
-
-#execute 'postgis-grant-all' do
-#  user 'postgres'
-#  command 'psql -d gis -c "GRANT ALL ON geometry_columns TO gisuser;"'
-#end
-
