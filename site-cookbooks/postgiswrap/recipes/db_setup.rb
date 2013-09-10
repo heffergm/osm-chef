@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: postgis
+# Cookbook Name:: postgiswrap
 # Recipe:: db_setup
 #
 # Copyright 2013, YOUR_COMPANY_NAME
