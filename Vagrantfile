@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "postgis"
 
   config.vm.box = "ubuntu-12.04-omnibus-chef"
-  config.vm.box_url = "http://grahamc.com/vagrant/ubuntu-12.04.2-server-amd64-vmware-fusion.box"
+  config.vm.box_url = "http://grahamc.com/vagrant/ubuntu-12.04-omnibus-chef.box"
 
   # Assign this VM to a host-only network IP, allowing you to access it
   # via the IP. Host-only networks can talk to the host machine as well as
