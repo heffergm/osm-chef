@@ -5,6 +5,7 @@ default[:postgresql][:hba_file]             = "/etc/postgresql/#{node[:postgresq
 default[:postgresql][:ident_file]           = "/etc/postgresql/#{node[:postgresql][:version]}/main/pg_ident.conf"
 default[:postgresql][:external_pid_file]    = "/var/run/postgresql/#{node[:postgresql][:version]}-main.pid"
 default[:postgresql][:external_pid_file]    = "/var/run/postgresql/#{node[:postgresql][:version]}-main.pid"
+default[:postgresql][:data_directory]       = "/var/lib/postgresql/#{node["postgresql"]["version"]}/main"
 default[:postgresql][:password][:postgres]  = '6b211d71ec225c69c66944eae0e524c4'
 
 default[:postgresql][:pg_hba] =  [
