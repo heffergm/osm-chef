@@ -77,7 +77,8 @@ Vagrant.configure("2") do |config|
       "recipe[postgiswrap::default]",
       "recipe[osm2pgsql::default]",
       "recipe[osmosis::default]",
-      "recipe[mapnikwrap::default]"
+      "recipe[mapnikwrap::default]",
+      "recipe[minutely_mapnik::default]"
     ]
   end
 end
