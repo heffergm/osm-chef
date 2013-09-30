@@ -10,11 +10,11 @@ cookbook 'mapnikwrap'      , git: 'https://github.com/heffergm/chef-mapnikwrap.g
 cookbook 'vpnwrap'         , git: 'https://github.com/heffergm/chef-vpnwrap.git'         , branch: 'master'
 cookbook 'openvpn'         , git: 'https://github.com/heffergm/chef-openvpn.git'         , branch: 'master'
 cookbook 'sysctl'          , git: 'https://github.com/heffergm/chef-sysctl.git'          , branch: 'master'
-cookbook 'postgresql'      , git: 'https://github.com/heffergm/chef-postgresql.git'      , tag: '0.13.0-187'
 
 # mapzen
 cookbook 'osmosis'         , git: 'https://github.com/mapzen/chef-osmosis.git'           , branch: 'master'
 cookbook 'osm2pgsql'       , git: 'https://github.com/mapzen/chef-osm2pgsql.git'         , branch: 'master'
+cookbook 'postgresql'      , git: 'https://github.com/mapzen/chef-postgresql.git'        , tag: '0.13.0-187'
 cookbook 'minutely_mapnik' , git: 'https://github.com/mapzen/chef-minutely_mapnik.git'   , branch: 'master'
 
 # external
